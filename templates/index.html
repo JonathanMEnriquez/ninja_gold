@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ninja Gold Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <h1>Welcome to the Great Ninja Gold Game!</h1>
+            <h2>Work hard for steady income or roll the dice for quick gains at the Casino!</h2>
+        </div>
+        <p class="gold">Gold: <span>{{ session['gold'] }}</span> </p>
+        <div>
+            <div class="box">
+                <h3>Farm</h3>
+                <h5>(earns 10-20 Gold)</h5><br><br>
+                <form action="/process_money", name='farm' method='post'>
+                    <input type="hidden" value="farm">
+                    <input type="submit" name = 'btn' value="farm">
+                </form>
+            </div>
+            <div class="box">
+                <h3>Cave</h3>
+                <h5>(earns 5-10 Gold)</h5><br><br>
+                <form action="/process_money", method='post'>
+                    <input type="hidden" value="cave">
+                    <input type="submit" name = 'btn' value="cave">
+                </form>
+            </div>
+            <div class="box">
+                <h3>House</h3>
+                <h5>(earns 2-5 Gold)</h5><br><br>
+                <form action="/process_money", method='post'>
+                    <input type="hidden" value="house">
+                    <input type="submit" name = 'btn' value="house">
+                </form>
+            </div>
+            <div class="box">
+                <h3>Casino</h3>
+                <h5>(earns/takes 0-50 Gold)</h5><br><br>
+                <form action="/process_money", method='post'>
+                    <input type="hidden" value="casino">
+                    <input type="submit" name = 'btn' value="casino">
+                </form>
+            </div>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="messages">
+                        <p>{{messages}}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </div>    
+</body>
+</html>
